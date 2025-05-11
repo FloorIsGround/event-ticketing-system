@@ -1,7 +1,8 @@
+// will be trying out JSDoc format for all controller functions
 const Booking = require('../models/Booking');
 const mongoose = require('mongoose');
 const Event = require('../models/Events');
-/**
+/** 
  * @desc    Get all bookings.
  *          - If the user is an admin, they can retrieve all bookings and optionally filter by user ID and/or event ID.
  *          - If the user is not an admin, they can only retrieve their own bookings, optionally filtered by event ID.
@@ -57,7 +58,7 @@ const getAllBookings = async (req, res) => {
  * @desc    Get a single booking by its ID.
  *          Intended for the user who owns the booking or an admin.
  * @route   GET /api/bookings/:id
- * @access  Private (Requires authentication; owner or admin access intended)
+ * @access  Private (Requires authentication)
  */
 const getBookingById = async (req, res) => {
     try {

@@ -21,9 +21,9 @@ server.get('/', (req, res) => {
 });
 
 // routes
-server.use('/api/auth', require('./routes/api/users')); //user related routes
-server.use('/api/events', require('./routes/api/events')); //event related routes
-server.use('/api/bookings', require('./routes/api/bookings')); //booking related routes
+server.use('/api/auth', require('./routes/api/users')); // user related routes
+server.use('/api/events', require('./routes/api/events')); // event related routes
+server.use('/api/bookings', require('./routes/api/bookings')); // booking related routes
 
 // catch all for non-existent requests, using /{*splat} because it replaced * for wildcards in express 5.x
 server.all('/{*splat}', (req, res) => { // if not a set route

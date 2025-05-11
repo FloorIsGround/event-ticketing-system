@@ -67,7 +67,7 @@ const getEventById = async (req, res) => {
 /**
  * @desc    Create a new event
  * @route   POST /api/events
- * @access  Private (Admin only) - Requires auth middleware
+ * @access  Private (Admin only)
  */
 const createEvent = async (req, res) => {
     const { title, description, category, venue, date, time, seatCapacity, price } = req.body;
@@ -104,7 +104,7 @@ const createEvent = async (req, res) => {
 /**
  * @desc    Update an event
  * @route   PUT /api/events/:id
- * @access  Private (Admin only) - Requires auth middleware
+ * @access  Private (Admin only)
  */
 const updateEvent = async (req, res) => {
     const { id } = req.params; // Get ID from URL parameters
@@ -180,7 +180,7 @@ const updateEvent = async (req, res) => {
 /**
  * @desc    Delete an event
  * @route   DELETE /api/events/:id
- * @access  Private (Admin only) - Requires auth middleware
+ * @access  Private (Admin only)
  */
 const deleteEvent = async (req, res) => {
     const { id } = req.params;

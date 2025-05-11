@@ -24,7 +24,7 @@ const registerUser = async (req, res) => {
         }
 
         // Hash password
-        const salt = await bcrypt.genSalt(10); //I use salt, which generates a random string, so a secret for bycrypt isn't required, but is still secure
+        const salt = await bcrypt.genSalt(10); // I use salt, which generates a random string, so a secret for bycrypt isn't required, but is still secure
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create new user
@@ -79,7 +79,7 @@ const loginUser = async (req, res) => {
         }
 
         // Check password
-        const isMatch = await bcrypt.compare(password, user.password); //bcrypt compares the password with the stored hash
+        const isMatch = await bcrypt.compare(password, user.password); // bcrypt compares the password with the stored hash
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
