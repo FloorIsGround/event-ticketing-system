@@ -12,28 +12,28 @@ connectDB();
 server.use(express.urlencoded({ extended: false}));
 server.use(express.json());
 
-//ensure we are set up to send our static file
+// ensure we are set up to send our static files
 server.use(express.static(path.join(__dirname, 'view')));
 
 server.get('/', (req, res) => {
-    //base url sends you to the welcome page
+    // base url sends you to the welcome page
     res.sendFile(path.join(__dirname, 'view', 'index.html'));
 });
 
-//routes
+// routes
 server.use('/api/auth', require('./routes/api/users')); //user related routes
 server.use('/api/events', require('./routes/api/events')); //event related routes
 server.use('/api/bookings', require('./routes/api/bookings')); //booking related routes
 
-//catch all for non-existent requests, using /{*splat} because it replaced * for wildcards in express 5.x
-server.all('/{*splat}', (req, res) => {
+// catch all for non-existent requests, using /{*splat} because it replaced * for wildcards in express 5.x
+server.all('/{*splat}', (req, res) => { // if not a set route
     res.status(404);
-    if(req.accepts('text/html')) {
+    if(req.accepts('text/html')) { // if html is accepted send file
         res.sendFile(path.join(__dirname, 'view', '404.html'));
-    } else if(req.accepts('application/json')) {
+    } else if(req.accepts('application/json')) { // if json accepted send json response
         res.json({ "error": '404 not found'});
         return;
-    } else {
+    } else {// otherwise 404 error text
         res.type('txt').send('404 Not Found'); 
     }
 });

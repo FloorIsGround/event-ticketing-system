@@ -14,7 +14,7 @@ const getAllBookings = async (req, res) => {
         const { user: queryUser, event: queryEvent} = req.query;
         let query = {};
 
-        //checks for valid ObjectId's for given queries if they exist
+        // checks for valid ObjectId's for given queries if they exist
         if (queryUser && !mongoose.Types.ObjectId.isValid(queryUser)) {
             return res.status(400).json({message: `Invalid user ID format: ${queryUser}`});
         }
@@ -23,7 +23,7 @@ const getAllBookings = async (req, res) => {
         }
 
         if(req.user.role === 'admin'){// only admins can filter by users and events
-            if (queryUser) { //if the query exists
+            if (queryUser) { // if the query exists
                 query.user = queryUser; // set query
             }
             if (queryEvent) {
@@ -37,12 +37,12 @@ const getAllBookings = async (req, res) => {
             }
         }
         
-        const booking = await Booking.find(query); //try to find the query
+        const booking = await Booking.find(query); // try to find the query
 
-        if (!booking.length && Object.keys(query).length > 0) { //if the list is empty, send a 404 message
+        if (!booking.length && Object.keys(query).length > 0) { // if the list is empty, send a 404 message
             return res.status(404).json({ message: 'No bookings found matching your criteria.' });
         }
-        if (!booking.length) { //if we searched a general query, and the list is empty, no bookings were found
+        if (!booking.length) { // if we searched a general query, and the list is empty, no bookings were found
             return res.status(404).json({ message: 'No booking found.' });
         }
 
@@ -105,16 +105,16 @@ const createBooking = async (req, res) => {
             quantity,
         });
         
-        //update booked seats on specific event
+        // update booked seats on specific event
         const eventUpdate = await Event.findById(event);
         let curBookedSeats = eventUpdate.bookedSeats;
         eventUpdate.bookedSeats += quantity;
-        if(eventUpdate.bookedSeats > eventUpdate.seatCapacity){ //if we try to book more than the available seats, we notify the user
+        if(eventUpdate.bookedSeats > eventUpdate.seatCapacity){ // if we try to book more than the available seats, we notify the user
             return res.status(400).json({
                 message: `Not enough seats left to book. Available seats: ${eventUpdate.seatCapacity - curBookedSeats}`
             });
         }
-        //if we pass, save and confirm
+        // if we pass, save and confirm
         await eventUpdate.save();
         const savedBooking = await newBooking.save();
         res.status(201).json({ message: 'Booking created successfully', event: savedBooking });

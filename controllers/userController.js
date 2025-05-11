@@ -1,15 +1,7 @@
-
-
-
-//two main functions for routes necessary
-// POST/api/auth/register - registering a new user
-//  POST/api/auth/login - authenticating a new user and returning JWT token
-
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Consider moving JWT_SECRET to an environment variable for security
 const JWT_SECRET = process.env.JWT_SECRET;
 
 /**
@@ -89,7 +81,7 @@ const loginUser = async (req, res) => {
         // Check password
         const isMatch = await bcrypt.compare(password, user.password); //bcrypt compares the password with the stored hash
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' }); // Generic message
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         // Generate JWT

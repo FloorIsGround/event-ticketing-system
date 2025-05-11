@@ -7,18 +7,18 @@ const auth = async (req, res, next) => {
     let token;
     try {
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-            // Get token from header (e.g., "Bearer <token>")
+            // get token from header (e.g., "Bearer <token>")
             token = req.headers.authorization.split(' ')[1];
 
-            // Verify token
+            // verify token
             const decoded = jwt.verify(token, JWT_SECRET);
 
-            // Get user from the token's payload (assuming payload is { user: { id: '...', role: '...' } })
-            // Fetch fresh user data to ensure user still exists and has up-to-date info
-            req.user = await User.findById(decoded.user.id).select('-password'); // Exclude password
+            // get user from the token's payload (assuming payload is { user: { id: '...', role: '...' } })
+            // fetch fresh user data to ensure user still exists and has up-to-date info
+            req.user = await User.findById(decoded.user.id).select('-password'); // exclude password
 
             if (!req.user) {
-                // User belonging to token no longer exists
+                // user belonging to token no longer exists
                 return res.status(401).json({ message: 'Not authorized, user not found' });
             }
             next();

@@ -19,8 +19,8 @@ const eventSchema = new Schema({
   date: {
     type: Date,
     required: true,
-    default: formatISO(Date.now(), { representation: 'date' }), //sets dates in mongodb to YYYY-MM-DDT00:00:00.000+00:00
-    //formatISO allows easy search and date indexing without need for a range
+    default: formatISO(Date.now(), { representation: 'date' }), // sets dates in mongodb to YYYY-MM-DDT00:00:00.000+00:00
+    // formatISO allows easy search and date indexing without need for a range
   },
   time: {
     type: String,
