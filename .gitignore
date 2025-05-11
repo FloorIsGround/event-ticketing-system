@@ -5,3 +5,5 @@ node_modules/
 #not reuploading firebase related files
 functions/
 public/
+firebase.json
+.firebaserc
