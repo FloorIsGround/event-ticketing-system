@@ -6,7 +6,7 @@ License: ISC
 
 A REST API for an event ticketing system. This application allows users to register, login, view events, create bookings, and manage events and bookings based on user roles (user/admin).
 
-For a current deployment: [I'm using Cyclic](https://event-ticketing-system-fm9m.onrender.com/)
+For a current deployment: [I'm using Render](https://event-ticketing-system-fm9m.onrender.com/)
 
 ## Features
 
